@@ -1,10 +1,11 @@
 "use client";
 
 import type React from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Building2, Fuel, Boxes, Layers, Truck, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Building2, Fuel, Boxes, Layers, Truck, ArrowRight, ChevronDown } from "lucide-react";
 import { SERVICES } from "@/lib/data";
 import type { Service } from "@/types";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -15,6 +16,9 @@ const ICON_MAP: Record<string, React.ElementType> = {
 
 function ServiceCard({ service, index }: { service: Service; index: number }) {
   const Icon = ICON_MAP[service.icon] || Building2;
+  const [expanded, setExpanded] = useState(false);
+  const extraFeatures = service.features.slice(4);
+  const hasExtraFeatures = extraFeatures.length > 0;
 
   return (
     <motion.div
@@ -45,14 +49,66 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           {service.title}
         </h3>
         <p className="text-gray-500 text-sm leading-relaxed mb-4">{service.description}</p>
-        <ul className="space-y-1 mb-5">
-          {service.features.slice(0, 3).map((feature) => (
+
+        <div className="rounded-xl border border-primary/10 bg-primary/[0.03] p-3 mb-4">
+          <p className="text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1">Best For</p>
+          <p className="text-sm text-primary font-medium leading-relaxed">{service.bestFor}</p>
+        </div>
+
+        <ul className="space-y-1.5 mb-5">
+          {service.features.slice(0, 4).map((feature) => (
             <li key={feature} className="flex items-center gap-2 text-sm text-gray-600">
               <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
               {feature}
             </li>
           ))}
         </ul>
+
+        {hasExtraFeatures && (
+          <div className="mb-5">
+            <button
+              type="button"
+              onClick={() => setExpanded((prev) => !prev)}
+              aria-expanded={expanded}
+              aria-controls={`service-scope-${service.id}`}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-primary hover:text-accent transition-colors"
+            >
+              {expanded ? "Hide Full Scope" : "Read Full Scope"}
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : "rotate-0"}`}
+              />
+            </button>
+            <AnimatePresence initial={false}>
+              {expanded && (
+                <motion.ul
+                  id={`service-scope-${service.id}`}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="mt-3 space-y-1.5 overflow-hidden"
+                >
+                  {extraFeatures.map((feature) => (
+                    <li key={feature} className="flex items-center gap-2 text-sm text-gray-600">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 gap-2 mb-5 text-xs">
+          <p className="rounded-lg border border-primary/10 bg-white px-3 py-2 text-gray-600">
+            <span className="font-semibold text-primary">Delivery:</span> {service.deliveryWindow}
+          </p>
+          <p className="rounded-lg border border-primary/10 bg-white px-3 py-2 text-gray-600">
+            <span className="font-semibold text-primary">Capacity:</span> {service.monthlyCapacity}
+          </p>
+        </div>
+
         <Link
           href={service.href}
           className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:text-accent transition-colors duration-200 group/link"

@@ -12,7 +12,7 @@ export default function TestimonialsSection() {
         <SectionHeader
           eyebrow="Client Stories"
           title='What Our <span class="text-accent">Clients Say</span>'
-          subtitle="Over 290 families trust us with their most important investment. Here's what they have to say."
+          subtitle="Real project experiences from Bengaluru clients across home construction, RMC, block supply, and transport logistics."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -34,9 +34,9 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.6 }}
         >
           {[
-            { value: "4.9/5", label: "Average Rating", sub: "Across all reviews" },
-            { value: "98%", label: "Client Satisfaction", sub: "Post-project surveys" },
-            { value: "85%", label: "Repeat Business", sub: "Return & refer clients" },
+            { value: "Bengaluru", label: "Primary Service Region", sub: "Projects across key city corridors" },
+            { value: "On-site", label: "Milestone Tracking", sub: "Progress updates from start to handover" },
+            { value: "End-to-end", label: "Single Partner Delivery", sub: "Build, materials, and transport under one team" },
           ].map(({ value, label, sub }) => (
             <div key={label}>
               <p className="font-heading font-bold text-4xl text-accent">{value}</p>

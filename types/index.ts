@@ -2,6 +2,9 @@ export interface Service {
   id: string;
   title: string;
   description: string;
+  bestFor: string;
+  deliveryWindow: string;
+  monthlyCapacity: string;
   icon: string;
   image: string;
   features: string[];
@@ -24,7 +27,6 @@ export interface Testimonial {
   id: string;
   name: string;
   role: string;
-  avatar: string;
   review: string;
   rating: number;
   project?: string;

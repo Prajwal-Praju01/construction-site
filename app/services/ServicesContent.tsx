@@ -5,7 +5,6 @@ import type { LucideIcon } from "lucide-react";
 import { CheckCircle } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import CTASection from "@/components/sections/CTASection";
-import SectionHeader from "@/components/ui/SectionHeader";
 import { SERVICES } from "@/lib/data";
 
 export default function ServicesContent() {
@@ -61,6 +60,23 @@ export default function ServicesContent() {
                   <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-2">Service 0{index + 1}</p>
                   <h2 className="font-heading font-bold text-3xl md:text-4xl text-primary mb-4">{service.title}</h2>
                   <p className="text-gray-500 leading-relaxed mb-6">{service.description}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+                    <div className="rounded-xl border border-primary/10 bg-primary/[0.03] p-3">
+                      <p className="text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1">Best For</p>
+                      <p className="text-sm text-primary font-medium leading-relaxed">{service.bestFor}</p>
+                    </div>
+                    <div className="rounded-xl border border-primary/10 bg-primary/[0.03] p-3">
+                      <p className="text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1">Delivery Window</p>
+                      <p className="text-sm text-primary font-medium leading-relaxed">{service.deliveryWindow}</p>
+                    </div>
+                    <div className="rounded-xl border border-primary/10 bg-primary/[0.03] p-3">
+                      <p className="text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1">Capacity</p>
+                      <p className="text-sm text-primary font-medium leading-relaxed">{service.monthlyCapacity}</p>
+                    </div>
+                  </div>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-400 mb-3">
+                    Scope Includes
+                  </p>
                   <ul className="space-y-3">
                     {service.features.map((feature) => (
                       <li key={feature} className="flex items-center gap-3 text-gray-700">

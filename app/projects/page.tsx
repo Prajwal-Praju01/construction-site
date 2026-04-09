@@ -6,7 +6,7 @@ import { PROJECTS } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Our Projects",
-  description: "Browse the Khushi Construction & Land Developers portfolio of completed homes and construction projects across Karnataka and Maharashtra.",
+  description: "Browse the Kushi Groups Tavarekere portfolio of completed homes and construction projects across Karnataka and Maharashtra.",
   alternates: {
     canonical: "/projects",
   },

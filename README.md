@@ -1,4 +1,4 @@
-# Khushi Construction & Land Developers — Next.js 14 Website
+# Kushi Groups Tavarekere — Next.js 14 Website
 
 A production-ready, full-featured construction company website built with Next.js 14, TypeScript, Tailwind CSS, Framer Motion, and Shadcn UI.
 
@@ -120,7 +120,7 @@ accent:  "#FF8C00",  // Construction Orange
 
 ### Update contact info
 - Phone: Search for `9845447449` across components
-- Email: Search for `info@khushiconstruction.com`
+- Email: Search for `kushigroups2012@gmail.com`
 - Address: Search for `123 Construction Ave`
 - WhatsApp: Update `phoneNumber` prop in `app/layout.tsx`
 
@@ -138,6 +138,21 @@ vercel
 ```
 
 Or connect your GitHub repo directly at [vercel.com](https://vercel.com).
+
+## Contact Form Backend
+
+The contact form now submits to `POST /api/contact` with server-side validation.
+
+- Required fields validated server-side: `name`, `phone`, `email`, `message`
+- Optional webhook forwarding: set `CONTACT_WEBHOOK_URL` in your environment
+
+Example `.env.local`:
+
+```bash
+CONTACT_WEBHOOK_URL=https://your-crm-or-automation-endpoint.example.com/webhook
+```
+
+If `CONTACT_WEBHOOK_URL` is not set, the form still validates and returns success in local-validation mode.
 
 ## Features
 

@@ -17,8 +17,8 @@ export default function Footer() {
                 <HardHat className="w-5 h-5 text-white" />
               </div>
               <div>
-                <span className="font-heading font-black text-lg text-white block leading-none">Khushi</span>
-                <span className="text-[10px] uppercase tracking-widest text-accent">Construction & Land Developers</span>
+                <span className="font-heading font-black text-lg text-white block leading-none">Kushi Groups</span>
+                <span className="text-[10px] uppercase tracking-widest text-accent">Tavarekere</span>
               </div>
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-5">
@@ -101,9 +101,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:info@khushiconstruction.com" className="flex items-center gap-3 text-white/60 hover:text-accent text-sm transition-colors">
+                <a href="mailto:kushigroups2012@gmail.com" className="flex items-center gap-3 text-white/60 hover:text-accent text-sm transition-colors">
                   <Mail className="w-4 h-4 text-accent flex-shrink-0" />
-                  info@khushiconstruction.com
+                  kushigroups2012@gmail.com
                 </a>
               </li>
             </ul>
@@ -120,7 +120,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-white/40 text-sm">
-            © {currentYear} Khushi Construction & Land Developers. All rights reserved.
+            © {currentYear} Kushi Groups Tavarekere. All rights reserved.
           </p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((item) => (

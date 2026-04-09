@@ -23,11 +23,11 @@ const inter = Inter({
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "Khushi Construction & Land Developers",
+  name: "Kushi Groups Tavarekere",
   url: "https://khushiconstruction.com",
   image: "https://khushiconstruction.com/og-image.jpg",
   telephone: "+91 9845447449",
-  email: "info@khushiconstruction.com",
+  email: "kushigroups2012@gmail.com",
   hasMap: "https://maps.app.goo.gl/7HEz5N1QLD3rtB316",
   address: {
     "@type": "PostalAddress",
@@ -63,11 +63,11 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Khushi Construction & Land Developers | Premium Home Building Services",
-    template: "%s | Khushi Construction & Land Developers",
+    default: "Kushi Groups Tavarekere | Premium Home Building Services",
+    template: "%s | Kushi Groups Tavarekere",
   },
   description:
-    "From basement to dream home — Khushi Construction & Land Developers delivers complete construction solutions including structural work, plumbing, electrical, and interior finishing with premium materials.",
+    "From basement to dream home — Kushi Groups Tavarekere delivers complete construction solutions including structural work, plumbing, electrical, and interior finishing with premium materials.",
   keywords: [
     "construction company",
     "home building",
@@ -82,14 +82,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://khushiconstruction.com",
-    siteName: "Khushi Construction & Land Developers",
-    title: "Khushi Construction & Land Developers | Premium Home Building Services",
+    siteName: "Kushi Groups Tavarekere",
+    title: "Kushi Groups Tavarekere | Premium Home Building Services",
     description: "Complete construction solutions from basement to dream home.",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Khushi Construction & Land Developers",
+    title: "Kushi Groups Tavarekere",
     description: "Premium home building services from basement to completion.",
     images: ["/og-image.jpg"],
   },

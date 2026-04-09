@@ -13,6 +13,11 @@ interface FormData {
   message: string;
 }
 
+interface ApiErrorResponse {
+  error?: string;
+  fieldErrors?: Partial<FormData>;
+}
+
 const SERVICES_OPTIONS = [
   "Basement Construction",
   "Structural Construction",
@@ -35,6 +40,9 @@ export default function ContactForm() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [submitError, setSubmitError] = useState("");
+
+  const WHATSAPP_NUMBER = "919845447449";
 
   function validate(): boolean {
     const newErrors: Partial<FormData> = {};
@@ -50,11 +58,47 @@ export default function ContactForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
+
+    setSubmitError("");
+    setErrors({});
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1800));
-    setLoading(false);
-    setSubmitted(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = (await response.json()) as ApiErrorResponse;
+
+      if (!response.ok) {
+        if (result.fieldErrors) {
+          setErrors(result.fieldErrors);
+        }
+
+        setSubmitError(
+          result.error || "Unable to submit right now. Please try again shortly."
+        );
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "Network issue while sending your request. Please call or WhatsApp us directly."
+      );
+    } finally {
+      setLoading(false);
+    }
   }
+
+  const whatsappText = encodeURIComponent(
+    `Hello Kushi Groups Tavarekere, I want a quote. Name: ${formData.name || ""}, Service: ${formData.service || "General"}, Location: ${formData.location || "Not shared"}.`
+  );
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappText}`;
 
   const inputClass =
     "w-full px-4 py-3 rounded-xl border border-construction-border bg-white text-construction-dark placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 text-sm";
@@ -76,8 +120,28 @@ export default function ContactForm() {
         <p className="text-gray-500 max-w-xs">
           Thank you, {formData.name.split(" ")[0]}. Our team will contact you within 24 hours.
         </p>
+        <a
+          href={whatsappHref}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-5 inline-flex items-center justify-center rounded-xl bg-green-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-700"
+        >
+          Continue on WhatsApp
+        </a>
         <button
-          onClick={() => { setSubmitted(false); setFormData({ name:"",phone:"",email:"",location:"",service:"",message:"" }); }}
+          onClick={() => {
+            setSubmitted(false);
+            setSubmitError("");
+            setErrors({});
+            setFormData({
+              name: "",
+              phone: "",
+              email: "",
+              location: "",
+              service: "",
+              message: "",
+            });
+          }}
           className="mt-6 text-accent font-semibold text-sm underline underline-offset-4 hover:text-primary transition-colors"
         >
           Send another message
@@ -88,6 +152,12 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
+      {submitError && (
+        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700" role="alert" aria-live="polite">
+          {submitError}
+        </p>
+      )}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {/* Name */}
         <div>
@@ -99,6 +169,8 @@ export default function ContactForm() {
             className={inputClass}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            autoComplete="name"
+            required
           />
           {errors.name && <p className={errorClass}>{errors.name}</p>}
         </div>
@@ -112,6 +184,8 @@ export default function ContactForm() {
             className={inputClass}
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            autoComplete="tel"
+            required
           />
           {errors.phone && <p className={errorClass}>{errors.phone}</p>}
         </div>
@@ -128,6 +202,8 @@ export default function ContactForm() {
             className={inputClass}
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            autoComplete="email"
+            required
           />
           {errors.email && <p className={errorClass}>{errors.email}</p>}
         </div>
@@ -171,6 +247,8 @@ export default function ContactForm() {
           className={`${inputClass} resize-none`}
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          minLength={12}
+          required
         />
         {errors.message && <p className={errorClass}>{errors.message}</p>}
       </div>

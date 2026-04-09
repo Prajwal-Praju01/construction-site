@@ -1,16 +1,25 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import ContactForm from "@/components/sections/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Get in touch with Khushi Construction & Land Developers for a free quote on your construction project.",
+  description:
+    "Talk to Kushi Groups Tavarekere and request a free quote for construction, RMC, block supply, petroleum infrastructure, and transport services.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
+
+const OFFICE_COORDS = "12.9654252,77.392188";
+const MAP_EMBED_URL = `https://www.google.com/maps?q=${OFFICE_COORDS}&output=embed`;
+const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${OFFICE_COORDS}`;
 
 const CONTACT_INFO = [
   { icon: Phone, label: "Phone", value: "9845447449", href: "tel:9845447449" },
-  { icon: Mail, label: "Email", value: "info@khushiconstruction.com", href: "mailto:info@khushiconstruction.com" },
-  { icon: MapPin, label: "Office", value: "Khushi Construction Office (See on map)", href: "https://maps.app.goo.gl/7HEz5N1QLD3rtB316" },
+  { icon: Mail, label: "Email", value: "kushigroups2012@gmail.com", href: "mailto:kushigroups2012@gmail.com" },
+  { icon: MapPin, label: "Office", value: "Kushi Groups Tavarekere Office (Get directions)", href: DIRECTIONS_URL },
   { icon: Clock, label: "Hours", value: "Mon–Fri 8AM–6PM · Sat 9AM–3PM", href: null },
 ];
 
@@ -36,7 +45,23 @@ export default function ContactPage() {
       {/* Main content */}
       <section className="section-padding bg-construction-light">
         <div className="container-custom">
-          <div className="max-w-2xl mx-auto space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 xl:gap-10 items-start">
+            <div className="surface-panel rounded-3xl p-6 sm:p-8">
+              <div className="mb-6">
+                <p className="text-accent font-semibold text-xs uppercase tracking-[0.2em] mb-2">
+                  Free Consultation
+                </p>
+                <h2 className="font-heading font-extrabold text-3xl text-primary leading-tight">
+                  Tell Us About Your Project
+                </h2>
+                <p className="text-gray-600 mt-2 text-sm sm:text-base">
+                  Share your requirements and timeline. Our team will get back within 24 hours with the next steps.
+                </p>
+              </div>
+              <ContactForm />
+            </div>
+
+            <div className="space-y-6">
               {/* Contact cards */}
               {CONTACT_INFO.map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="bg-white rounded-2xl p-5 shadow-card flex items-start gap-4">
@@ -46,7 +71,12 @@ export default function ContactPage() {
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-0.5">{label}</p>
                     {href ? (
-                      <a href={href} className="text-primary font-semibold text-sm hover:text-accent transition-colors">
+                      <a
+                        href={href}
+                        target={href.startsWith("http") ? "_blank" : undefined}
+                        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                        className="text-primary font-semibold text-sm hover:text-accent transition-colors"
+                      >
                         {value}
                       </a>
                     ) : (
@@ -57,18 +87,32 @@ export default function ContactPage() {
               ))}
 
               {/* Map embed */}
-              <div className="rounded-2xl overflow-hidden shadow-card h-56 bg-construction-border">
+              <div className="relative rounded-2xl overflow-hidden shadow-card h-56 bg-construction-border">
                 <iframe
-                  src="https://www.google.com/maps?q=12.9654252,77.392188&output=embed"
+                  src={MAP_EMBED_URL}
                   width="100%"
                   height="100%"
+                  className="pointer-events-none"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Khushi Construction & Land Developers office location"
+                  title="Kushi Groups Tavarekere office location"
                 />
+                <a
+                  href={DIRECTIONS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Get directions to Kushi Groups Tavarekere office"
+                  className="absolute inset-0 z-10"
+                >
+                  <span className="sr-only">Open directions in Google Maps</span>
+                </a>
+                <div className="pointer-events-none absolute bottom-3 right-3 z-20 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-primary shadow">
+                  Get directions
+                </div>
               </div>
+            </div>
           </div>
         </div>
       </section>

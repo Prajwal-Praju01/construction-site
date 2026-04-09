@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const servicesSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Khushi Construction Services",
+  name: "Kushi Groups Tavarekere Services",
   itemListElement: SERVICES.map((service, index) => ({
     "@type": "Service",
     position: index + 1,
@@ -22,7 +22,7 @@ const servicesSchema = {
     areaServed: "Karnataka and Maharashtra",
     provider: {
       "@type": "LocalBusiness",
-      name: "Khushi Construction & Land Developers",
+      name: "Kushi Groups Tavarekere",
       url: "https://khushiconstruction.com",
     },
     url: `https://khushiconstruction.com${service.href}`,

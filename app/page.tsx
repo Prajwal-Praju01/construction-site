@@ -8,7 +8,7 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTASection from "@/components/sections/CTASection";
 
 export const metadata: Metadata = {
-  title: "Khushi Construction & Land Developers | Premium Home Building Services",
+  title: "Kushi Groups Tavarekere | Premium Home Building Services",
   description:
     "From basement to dream home — complete construction solutions with premium materials and experienced engineers.",
   alternates: {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 const homeSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Khushi Construction & Land Developers",
+  name: "Kushi Groups Tavarekere",
   url: "https://khushiconstruction.com",
   inLanguage: "en-IN",
 };

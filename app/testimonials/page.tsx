@@ -5,7 +5,7 @@ import CTASection from "@/components/sections/CTASection";
 
 export const metadata: Metadata = {
   title: "Client Testimonials",
-  description: "What our clients say about Khushi Construction & Land Developers. Real reviews from real homeowners.",
+  description: "What our clients say about Kushi Groups Tavarekere. Real reviews from real homeowners.",
 };
 
 export default function TestimonialsPage() {

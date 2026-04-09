@@ -38,7 +38,7 @@ export default function AboutContent() {
             className="mt-6 text-white/70 text-lg max-w-2xl leading-relaxed"
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Khushi Construction & Land Developers was founded on a simple belief — every family deserves a home built with the same care and precision as a monument. Eighteen years and 340+ projects later, that belief hasn&apos;t changed.
+            Kushi Groups Tavarekere was founded on a simple belief — every family deserves a home built with the same care and precision as a monument. Eighteen years and 340+ projects later, that belief hasn&apos;t changed.
           </motion.p>
         </div>
       </section>
@@ -51,9 +51,9 @@ export default function AboutContent() {
               <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">Our Story</p>
               <h2 className="font-heading font-bold text-4xl text-primary mb-6">From One Crew to 45 Specialists</h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>Marcus Reid started Khushi Construction & Land Developers with a 3-person crew, a pickup truck, and an obsession with quality that his early clients still talk about. Every nail, every beam, every pipe was treated as part of something that would last generations.</p>
+                <p>Marcus Reid started Kushi Groups Tavarekere with a 3-person crew, a pickup truck, and an obsession with quality that his early clients still talk about. Every nail, every beam, every pipe was treated as part of something that would last generations.</p>
                 <p>Word spread. Referrals turned into a waitlist. By 2012, the crew had grown to 20. By 2018, we had completed our 200th home and expanded into full turnkey construction — handling everything from basement excavation to interior finish out.</p>
-                <p>Today, Khushi Construction & Land Developers employs 45 licensed professionals across architecture, engineering, plumbing, electrical, and design. We remain privately owned and hands-on. Marcus still walks every job site, every week.</p>
+                <p>Today, Kushi Groups Tavarekere employs 45 licensed professionals across architecture, engineering, plumbing, electrical, and design. We remain privately owned and hands-on. Marcus still walks every job site, every week.</p>
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
                 {["Licensed & Insured", "OSHA Certified", "Green Build Certified", "Award Winning"].map((badge) => (

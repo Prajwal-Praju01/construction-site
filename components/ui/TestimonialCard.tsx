@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import type { Testimonial } from "@/types";
@@ -37,23 +36,12 @@ export default function TestimonialCard({ testimonial, index = 0 }: TestimonialC
       <div className="w-12 h-0.5 bg-gradient-to-r from-accent to-accent/40 mb-5" />
 
       {/* Author */}
-      <div className="flex items-center gap-3">
-        <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-primary/10 flex-shrink-0">
-          <Image
-            src={testimonial.avatar}
-            alt={testimonial.name}
-            fill
-            className="object-cover"
-            sizes="48px"
-          />
-        </div>
-        <div>
-          <p className="font-heading font-bold text-primary text-sm">{testimonial.name}</p>
-          <p className="text-gray-400 text-xs">{testimonial.role}</p>
-          {testimonial.project && (
-            <p className="text-accent text-xs font-medium mt-0.5">{testimonial.project}</p>
-          )}
-        </div>
+      <div>
+        <p className="font-heading font-bold text-primary text-sm">{testimonial.name}</p>
+        <p className="text-gray-400 text-xs">{testimonial.role}</p>
+        {testimonial.project && (
+          <p className="text-accent text-xs font-medium mt-0.5">{testimonial.project}</p>
+        )}
       </div>
     </motion.div>
   );

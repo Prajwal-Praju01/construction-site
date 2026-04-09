@@ -23,6 +23,22 @@ export default function Navbar() {
     setMobileOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [mobileOpen]);
+
   const isHome = pathname === "/";
 
   return (
@@ -49,7 +65,7 @@ export default function Navbar() {
                     scrolled || !isHome ? "text-primary" : "text-white"
                   )}
                 >
-                  Khushi
+                  Kushi Groups
                 </span>
                 <span
                   className={cn(
@@ -57,7 +73,7 @@ export default function Navbar() {
                     scrolled || !isHome ? "text-accent" : "text-accent/90"
                   )}
                 >
-                  Construction & Land Developers
+                  Tavarekere
                 </span>
               </div>
             </Link>
@@ -112,6 +128,8 @@ export default function Navbar() {
                   : "text-white hover:bg-white/10"
               )}
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -133,11 +151,13 @@ export default function Navbar() {
               onClick={() => setMobileOpen(false)}
             />
             <motion.nav
+              id="mobile-navigation"
               className="absolute top-0 right-0 h-full w-72 bg-white shadow-2xl flex flex-col pt-24 pb-8 px-6"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              aria-label="Mobile navigation"
             >
               {NAV_LINKS.map((link, i) => (
                 <motion.div
