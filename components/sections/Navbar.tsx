@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, HardHat, Phone } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { NAV_LINKS } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
@@ -55,27 +56,14 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-lg bg-accent flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-                <HardHat className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <span
-                  className={cn(
-                    "font-heading font-black text-lg leading-none block transition-colors",
-                    scrolled || !isHome ? "text-primary" : "text-white"
-                  )}
-                >
-                  Kushi Groups
-                </span>
-                <span
-                  className={cn(
-                    "text-[10px] font-medium uppercase tracking-widest transition-colors",
-                    scrolled || !isHome ? "text-accent" : "text-accent/90"
-                  )}
-                >
-                  Tavarekere
-                </span>
-              </div>
+              <Image
+                src="/images/Gemini_Generated_Image_cd7rurcd7rurcd7r.png"
+                alt="Kushi Groups Tavarekere Logo"
+                width={60}
+                height={60}
+                className="h-14 w-auto group-hover:scale-105 transition-transform"
+                priority
+              />
             </Link>
 
             {/* Desktop nav */}
