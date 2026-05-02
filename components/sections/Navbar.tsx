@@ -55,7 +55,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group">
+            <Link href="/" className="flex flex-col items-center gap-1 group">
               <Image
                 src="/images/Gemini_Generated_Image_cd7rurcd7rurcd7r.png"
                 alt="Kushi Groups Tavarekere Logo"
@@ -64,6 +64,12 @@ export default function Navbar() {
                 className="h-14 w-auto group-hover:scale-105 transition-transform"
                 priority
               />
+              <span className={cn(
+                "text-xs font-bold text-center leading-tight whitespace-nowrap",
+                scrolled || !isHome ? "text-primary" : "text-white/90"
+              )}>
+                Kushi Group's<br />Tavarekere
+              </span>
             </Link>
 
             {/* Desktop nav */}
