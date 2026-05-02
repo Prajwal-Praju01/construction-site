@@ -39,6 +39,14 @@ export const SERVICES: Service[] = [
       "On-time, on-budget delivery discipline",
     ],
     href: "/services#construction",
+    steps: [
+      { number: 1, title: "Site Assessment & Documentation", description: "Evaluate site conditions, obtain regulatory approvals, and finalize design and material specifications." },
+      { number: 2, title: "Excavation & Foundation", description: "Clear site, conduct excavation, and construct foundations using our quality-controlled concrete." },
+      { number: 3, title: "Structural Framework", description: "Erect RCC or steel structure with staged quality inspections and material testing at each milestone." },
+      { number: 4, title: "MEP Installation", description: "Route and install mechanical, electrical, and plumbing systems with compliance verification." },
+      { number: 5, title: "Interior & Exterior Finishing", description: "Complete interior finishes, external facade, and landscaping with premium materials and craftsmanship." },
+      { number: 6, title: "Final Inspection & Handover", description: "Comprehensive walkthrough, compliance certification, and project handover with full documentation." },
+    ],
   },
   {
     id: "petroleum",
@@ -61,6 +69,14 @@ export const SERVICES: Service[] = [
       "Commissioning support through handover stage",
     ],
     href: "/services#petroleum",
+    steps: [
+      { number: 1, title: "Regulatory Approval & Planning", description: "Coordinate with petroleum authorities and local authorities to obtain necessary permits and finalize design layout." },
+      { number: 2, title: "Civil Site Preparation", description: "Excavate tank pit, prepare ground levels, and construct underground chamber structures with safety standards." },
+      { number: 3, title: "Underground Infrastructure", description: "Install underground tanks, piping systems, and ancillary chambers with leak detection and safety systems." },
+      { number: 4, title: "Canopy & Forecourt", description: "Construct fuel dispenser canopy, driveway, and forecourt using our concrete and blocks for durability." },
+      { number: 5, title: "Retail & Utility Installation", description: "Build retail block, office areas, and install electrical, drainage, and utility systems." },
+      { number: 6, title: "Commissioning & Handover", description: "Conduct safety inspections, system testing, and obtain operational clearance before handover." },
+    ],
   },
   {
     id: "concrete-blocks",
@@ -83,6 +99,14 @@ export const SERVICES: Service[] = [
       "On-time delivery through our transport network",
     ],
     href: "/services#concrete-blocks",
+    steps: [
+      { number: 1, title: "Project Requirement Assessment", description: "Evaluate your project specifications — block dimensions, strength requirements, and delivery schedule." },
+      { number: 2, title: "Mix Design & Production Setup", description: "Prepare optimized concrete mix using quality materials and set up automated production lines." },
+      { number: 3, title: "Block Manufacturing", description: "Produce blocks using precision molds ensuring uniform dimensions and consistent compressive strength." },
+      { number: 4, title: "Quality Testing", description: "Conduct compression tests and dimensional checks on every batch before approval." },
+      { number: 5, title: "Curing & Conditioning", description: "Controlled curing process to achieve optimal strength and product stability before dispatch." },
+      { number: 6, title: "Palletization & Delivery", description: "Palletize blocks with precision handling and deliver via our transport fleet with minimal breakage." },
+    ],
   },
   {
     id: "ready-mix",
@@ -105,6 +129,14 @@ export const SERVICES: Service[] = [
       "Technical support for mix selection and application",
     ],
     href: "/services#ready-mix",
+    steps: [
+      { number: 1, title: "Order Placement & Scheduling", description: "Provide your concrete grade requirement and schedule a pour slot through our dispatch coordination team." },
+      { number: 2, title: "Mix Design Confirmation", description: "Our engineers confirm the optimal concrete grade (M10–M50) based on your structural requirements." },
+      { number: 3, title: "Batch Preparation at Plant", description: "Accurately batch aggregates, cement, and water using automated weighing systems with moisture control." },
+      { number: 4, title: "Transit Mixer Loading", description: "Load concrete into transit mixers with controlled agitation to maintain uniformity during transport." },
+      { number: 5, title: "On-Site Delivery & Testing", description: "Deliver concrete to your site and perform slump and consistency tests before pour commencement." },
+      { number: 6, title: "Pour Support & Documentation", description: "Provide on-site technical support and deliver complete test certificates and quality documentation." },
+    ],
   },
   {
     id: "transport",
@@ -127,6 +159,14 @@ export const SERVICES: Service[] = [
       "Time-bound delivery tracking and escalation response",
     ],
     href: "/services#transport",
+    steps: [
+      { number: 1, title: "Load Requirement Assessment", description: "Specify material type, quantity, source location, and destination for optimized fleet allocation." },
+      { number: 2, title: "Route Planning & Scheduling", description: "Our logistics team plans efficient routes considering traffic, site access restrictions, and delivery windows." },
+      { number: 3, title: "Fleet Dispatch", description: "Deploy appropriate vehicles (tippers, trailers) from our fleet based on load type and volume." },
+      { number: 4, title: "Material Loading", description: "Safely load materials with precision to ensure balance, prevent spillage, and meet weight limits." },
+      { number: 5, title: "In-Transit Monitoring", description: "Track vehicle location in real-time and maintain communication for schedule adherence and issue resolution." },
+      { number: 6, title: "On-Site Unloading & Documentation", description: "Professional unloading at destination with delivery receipts, weight tickets, and quality verification." },
+    ],
   },
 ];
 

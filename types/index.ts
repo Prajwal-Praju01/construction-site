@@ -9,6 +9,13 @@ export interface Service {
   image: string;
   features: string[];
   href: string;
+  steps: ServiceStep[];
+}
+
+export interface ServiceStep {
+  number: number;
+  title: string;
+  description: string;
 }
 
 export interface Project {

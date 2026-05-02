@@ -1,13 +1,17 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import type { LucideIcon } from "lucide-react";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, ArrowRight } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import CTASection from "@/components/sections/CTASection";
+import ServiceStepsModal from "@/components/ui/ServiceStepsModal";
 import { SERVICES } from "@/lib/data";
+import type { Service } from "@/types";
 
 export default function ServicesContent() {
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
   const iconMap = LucideIcons as unknown as Record<string, LucideIcon>;
 
   return (
@@ -30,67 +34,76 @@ export default function ServicesContent() {
         </div>
       </section>
 
-      {/* Services detail */}
+      {/* Services Grid */}
       <section className="section-padding bg-white">
-        <div className="container-custom space-y-24">
-          {SERVICES.map((service, index) => {
-            const IconComponent = iconMap[service.icon];
-            const isEven = index % 2 === 0;
-            return (
-              <motion.div
-                key={service.id}
-                id={service.id}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center scroll-mt-24`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.6 }}
-              >
-                {/* Image */}
-                <div className={`relative h-[400px] rounded-2xl overflow-hidden shadow-xl ${!isEven ? "lg:order-2" : ""}`}>
-                  <Image src={service.image} alt={service.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
-                  <div className="absolute top-5 left-5 w-14 h-14 bg-accent rounded-xl flex items-center justify-center shadow-lg">
-                    {IconComponent && <IconComponent className="w-7 h-7 text-white" />}
+        <div className="container-custom">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {SERVICES.map((service, index) => {
+              const IconComponent = iconMap[service.icon];
+              return (
+                <motion.div
+                  key={service.id}
+                  id={service.id}
+                  className="group relative overflow-hidden rounded-2xl bg-white border border-primary/10 shadow-card hover:shadow-card-hover transition-all duration-500"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  whileHover={{ y: -8 }}
+                >
+                  {/* Image */}
+                  <div className="relative h-56 overflow-hidden bg-gray-200">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                    <div className="absolute top-4 left-4 w-12 h-12 rounded-xl bg-accent/95 flex items-center justify-center shadow-lg ring-4 ring-white/20">
+                      {IconComponent && (
+                        <IconComponent className="w-6 h-6 text-white" />
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className={!isEven ? "lg:order-1" : ""}>
-                  <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-2">Service 0{index + 1}</p>
-                  <h2 className="font-heading font-bold text-3xl md:text-4xl text-primary mb-4">{service.title}</h2>
-                  <p className="text-gray-500 leading-relaxed mb-6">{service.description}</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-                    <div className="rounded-xl border border-primary/10 bg-primary/[0.03] p-3">
-                      <p className="text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1">Best For</p>
-                      <p className="text-sm text-primary font-medium leading-relaxed">{service.bestFor}</p>
-                    </div>
-                    <div className="rounded-xl border border-primary/10 bg-primary/[0.03] p-3">
-                      <p className="text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1">Delivery Window</p>
-                      <p className="text-sm text-primary font-medium leading-relaxed">{service.deliveryWindow}</p>
-                    </div>
-                    <div className="rounded-xl border border-primary/10 bg-primary/[0.03] p-3">
-                      <p className="text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1">Capacity</p>
-                      <p className="text-sm text-primary font-medium leading-relaxed">{service.monthlyCapacity}</p>
-                    </div>
+                  {/* Content */}
+                  <div className="p-6">
+                    <p className="text-accent font-semibold text-xs uppercase tracking-widest mb-2">
+                      Service 0{index + 1}
+                    </p>
+                    <h3 className="font-heading font-bold text-xl text-primary mb-3 group-hover:text-accent transition-colors duration-200 leading-snug">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+
+                    {/* Learn More Button */}
+                    <button
+                      onClick={() => setSelectedService(service)}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-accent/10 text-accent font-semibold text-sm hover:bg-accent/20 transition-all duration-200 group/btn"
+                    >
+                      Learn More
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    </button>
                   </div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    Scope Includes
-                  </p>
-                  <ul className="space-y-3">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-3 text-gray-700">
-                        <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
-                        <span className="font-medium">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            );
-          })}
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
+
+      {/* Service Steps Modal */}
+      {selectedService && (
+        <ServiceStepsModal
+          service={selectedService}
+          open={!!selectedService}
+          onClose={() => setSelectedService(null)}
+        />
+      )}
 
       <CTASection />
     </>
