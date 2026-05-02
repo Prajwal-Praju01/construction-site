@@ -68,7 +68,7 @@ export default function Navbar() {
                 "text-xs font-bold text-center leading-tight whitespace-nowrap",
                 scrolled || !isHome ? "text-primary" : "text-white/90"
               )}>
-                Kushi Group's<br />Tavarekere
+                Kushi Group&apos;s<br />Tavarekere
               </span>
             </Link>
 
