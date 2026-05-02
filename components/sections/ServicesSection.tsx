@@ -4,21 +4,27 @@ import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { Building2, Fuel, Boxes, Layers, Truck, ArrowRight, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
+import { Building2, Fuel, Boxes, Layers, Truck, ArrowRight } from "lucide-react";
 import { SERVICES } from "@/lib/data";
 import type { Service } from "@/types";
 import SectionHeader from "@/components/ui/SectionHeader";
+import ServiceStepsModal from "@/components/ui/ServiceStepsModal";
 
 const ICON_MAP: Record<string, React.ElementType> = {
   Building2, Fuel, Boxes, Layers, Truck,
 };
 
-function ServiceCard({ service, index }: { service: Service; index: number }) {
+function ServiceCard({ 
+  service, 
+  index,
+  onLearnMore
+}: { 
+  service: Service; 
+  index: number;
+  onLearnMore: (service: Service) => void;
+}) {
   const Icon = ICON_MAP[service.icon] || Building2;
-  const [expanded, setExpanded] = useState(false);
-  const extraFeatures = service.features.slice(4);
-  const hasExtraFeatures = extraFeatures.length > 0;
 
   return (
     <motion.div
@@ -48,74 +54,17 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         <h3 className="font-heading font-bold text-xl text-primary mb-2 group-hover:text-accent transition-colors duration-200 leading-snug">
           {service.title}
         </h3>
-        <p className="text-gray-500 text-sm leading-relaxed mb-4">{service.description}</p>
+        <p className="text-gray-600 text-sm leading-relaxed mb-6">
+          {service.description}
+        </p>
 
-        <div className="rounded-xl border border-primary/10 bg-primary/[0.03] p-3 mb-4">
-          <p className="text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1">Best For</p>
-          <p className="text-sm text-primary font-medium leading-relaxed">{service.bestFor}</p>
-        </div>
-
-        <ul className="space-y-1.5 mb-5">
-          {service.features.slice(0, 4).map((feature) => (
-            <li key={feature} className="flex items-center gap-2 text-sm text-gray-600">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-
-        {hasExtraFeatures && (
-          <div className="mb-5">
-            <button
-              type="button"
-              onClick={() => setExpanded((prev) => !prev)}
-              aria-expanded={expanded}
-              aria-controls={`service-scope-${service.id}`}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-primary hover:text-accent transition-colors"
-            >
-              {expanded ? "Hide Full Scope" : "Read Full Scope"}
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : "rotate-0"}`}
-              />
-            </button>
-            <AnimatePresence initial={false}>
-              {expanded && (
-                <motion.ul
-                  id={`service-scope-${service.id}`}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="mt-3 space-y-1.5 overflow-hidden"
-                >
-                  {extraFeatures.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm text-gray-600">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </motion.ul>
-              )}
-            </AnimatePresence>
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 gap-2 mb-5 text-xs">
-          <p className="rounded-lg border border-primary/10 bg-white px-3 py-2 text-gray-600">
-            <span className="font-semibold text-primary">Delivery:</span> {service.deliveryWindow}
-          </p>
-          <p className="rounded-lg border border-primary/10 bg-white px-3 py-2 text-gray-600">
-            <span className="font-semibold text-primary">Capacity:</span> {service.monthlyCapacity}
-          </p>
-        </div>
-
-        <Link
-          href={service.href}
-          className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:text-accent transition-colors duration-200 group/link"
+        <button
+          onClick={() => onLearnMore(service)}
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-accent/10 text-accent font-semibold text-sm hover:bg-accent/20 transition-all duration-200 group/btn"
         >
           Learn More
-          <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1" />
-        </Link>
+          <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+        </button>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent to-accent/60 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
     </motion.div>
@@ -123,6 +72,8 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 }
 
 export function ServicesSection() {
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+
   return (
     <section className="section-padding bg-white relative overflow-hidden" id="services">
       <div className="absolute inset-0 section-grid-bg opacity-40" />
@@ -136,7 +87,12 @@ export function ServicesSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((service, i) => (
-            <ServiceCard key={service.id} service={service} index={i} />
+            <ServiceCard 
+              key={service.id} 
+              service={service} 
+              index={i}
+              onLearnMore={setSelectedService}
+            />
           ))}
         </div>
 
@@ -155,6 +111,15 @@ export function ServicesSection() {
           </Link>
         </motion.div>
       </div>
+
+      {/* Service Steps Modal */}
+      {selectedService && (
+        <ServiceStepsModal
+          service={selectedService}
+          open={!!selectedService}
+          onClose={() => setSelectedService(null)}
+        />
+      )}
     </section>
   );
 }
